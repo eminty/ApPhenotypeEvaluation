@@ -37,9 +37,9 @@ ENV LD_LIBRARY_PATH=/usr/lib/jvm/java-11-openjdk-amd64/lib/server
 RUN R CMD javareconf
 
 # Copy the lock file
-# COPY renv.lock /workdir
-# COPY install_renv_lock.R /workdir
-# RUN cd /workdir && Rscript install_renv_lock.R
+COPY renv.lock /workdir
+COPY install_renv_lock.R /workdir
+RUN cd /workdir && Rscript install_renv_lock.R
 
 # install aditional packages
 COPY install_additional_packages.R /workdir
