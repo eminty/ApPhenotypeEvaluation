@@ -1671,7 +1671,7 @@
 			"RemoteType" : "github",
 			"RemoteHost" : "api.github.com",
 			"RemoteRepo" : "ApPhenotypeEvaluation",
-			"RemoteUsername" : "ohdsi-studies",
+			"RemoteUsername" : "eminty",
 			"RemoteRef" : "main"
 	}
   }
