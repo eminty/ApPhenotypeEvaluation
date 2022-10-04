@@ -54,11 +54,13 @@
     "CohortDiagnostics": {
       "Package": "CohortDiagnostics",
       "Version": "2.2.4",
-      "Source": "URL",
+      "Source": "GitHub",
       "Remotes": "ohdsi/Eunomia, ohdsi/FeatureExtraction, ohdsi/ROhdsiWebApi,\n        ohdsi/CirceR, ohdsi/CohortGenerator",
-      "RemoteType": "url",
-      "RemoteUrl": "https://github.com/OHDSI/CohortDiagnostics/archive/refs/tags/v2.2.4.tar.gz",
-      "Hash": "4560142ed2569657414a6a2c565ea8d6",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortDiagnostics",
+      "RemoteRef":"stanford2",
+      "RemoteUsername":"OHDSI",
       "Requirements": [
         "Andromeda",
         "CohortGenerator",
