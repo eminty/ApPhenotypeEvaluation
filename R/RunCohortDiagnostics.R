@@ -47,7 +47,7 @@ runCohortDiagnostics <- function(connectionDetails,
       temporalStartDays = c(-365, -30, 0, 1, 31),
       temporalEndDays = c(-31, -1, 0, 30, 365)
     ),
-    minCellCount = 5,
+    minCellCount = 10,
     incremental = TRUE,
     incrementalFolder = file.path(exportFolder, "incremental")
   )
