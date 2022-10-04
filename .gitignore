@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 *.html
+docker/run_docker_minty.R
