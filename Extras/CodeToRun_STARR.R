@@ -1,13 +1,6 @@
+# This runs from eminty/ap_phenotype_evaluation:0.2 docker container.
+# eminty/ApPhentotypeEvaluation renv.lock is initialized in the container build. 
 library()
-
-install.packages("renv")
-packageLocation <- "/workdir/workdir/ExecutionVersion/ApPhenotypeEvaluation" # will need >=510MB of disk space for all packages and dependencies
-if (!file.exists(packageLocation)) {
-  dir.create(packageLocation, recursive = TRUE)
-}
-setwd(packageLocation)
-download.file("https://raw.githubusercontent.com/eminty/ApPhenotypeEvaluation/main/renv.lock", "renv.lock")
-renv::init()
 
 # database settings ============================================================
 
@@ -15,6 +8,7 @@ databaseId <- "STARR"
 cdmDatabaseSchema <- "som-rit-phi-starr-prod.starr_omop_cdm5_deid_latest"
 cohortDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 cohortTable <- "ap_phe_eval"
+tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 
 # local settings ===============================================================
 studyFolder <- "/workdir/workdir/"
@@ -54,8 +48,27 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms="bigquery",
 # 
 # print(counts)
 # DatabaseConnector::disconnect(connection)
+
+
 # execute study ================================================================
 library(magrittr)
+##staged execution
+# cohort generation
+# ApPhenotypeEvaluation::execute(
+#   connectionDetails = connectionDetails,
+#   cdmDatabaseSchema = cdmDatabaseSchema,
+#   cohortDatabaseSchema = cohortDatabaseSchema,
+#   cohortTable = cohortTable,
+#   outputFolder = outputFolder,
+#   databaseId = databaseId,
+#   createCohortTable = TRUE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
+#   createCohorts = TRUE,
+#   runCohortDiagnostics = FALSE,
+#   runValidation = FALSE
+# )
+
+#cohort diagnostics
+
 ApPhenotypeEvaluation::execute(
   connectionDetails = connectionDetails,
   cdmDatabaseSchema = cdmDatabaseSchema,
@@ -63,11 +76,26 @@ ApPhenotypeEvaluation::execute(
   cohortTable = cohortTable,
   outputFolder = outputFolder,
   databaseId = databaseId,
-  createCohortTable = TRUE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
-  createCohorts = TRUE,
+  createCohortTable = FALSE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
+  createCohorts = FALSE,
   runCohortDiagnostics = TRUE,
+  runValidation = FALSE
+)
+
+ApPhenotypeEvaluation::execute(
+  connectionDetails = connectionDetails,
+  cdmDatabaseSchema = cdmDatabaseSchema,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  cohortTable = cohortTable,
+  outputFolder = outputFolder,
+  databaseId = databaseId,
+  createCohortTable = FALSE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
+  createCohorts = FALSE,
+  runCohortDiagnostics = FALSE,
   runValidation = TRUE
 )
+
+
 
 # review results ===============================================================
 ApPhenotypeEvaluation::compileShinyData(outputFolder)
