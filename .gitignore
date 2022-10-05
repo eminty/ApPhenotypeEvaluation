@@ -5,3 +5,4 @@
 *.html
 docker/run_docker_minty.R
 .DS_Store
+errorReportSql.txt

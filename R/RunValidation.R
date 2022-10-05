@@ -2,6 +2,7 @@
 runValidation <- function(connectionDetails,
                           cdmDatabaseSchema,
                           cohortDatabaseSchema,
+                          tempEmulationSchema,
                           cohortTable,
                           outputFolder) {
 
@@ -34,6 +35,7 @@ runValidation <- function(connectionDetails,
     pheValReferenceTable <- PheValuator::runPheValuatorAnalyses(
       connectionDetails = connectionDetails,
       cdmDatabaseSchema = cdmDatabaseSchema,
+      tempEmulationSchema = tempEmulationSchema,
       cohortDatabaseSchema = cohortDatabaseSchema,
       cohortTable = cohortTable,
       workDatabaseSchema = cohortDatabaseSchema,

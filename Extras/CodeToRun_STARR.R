@@ -8,7 +8,7 @@ databaseId <- "STARR"
 cdmDatabaseSchema <- "som-rit-phi-starr-prod.starr_omop_cdm5_deid_latest"
 cohortDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 cohortTable <- "ap_phe_eval"
-tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
+tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval_temp"
 
 # local settings ===============================================================
 studyFolder <- "/workdir/workdir/"
@@ -51,10 +51,9 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms="bigquery",
 # debugging.
 
 # uninstall current version of ApPhenotypeEvaluation
-system("sudo chmod 777 -R /usr/local/lib/R/")
-remove.packages("ApPhenotypeEvaluation")
-library()
-
+# system("sudo chmod 777 -R /usr/local/lib/R/")
+# remove.packages("ApPhenotypeEvaluation")
+# library()
 
 # open ApPhenotypeEvaluation Project
 # tempEmulationSchema argument added to RunCohortDiagnostics.R
@@ -81,23 +80,27 @@ library(magrittr)
 
 #cohort diagnostics
 
-ApPhenotypeEvaluation::execute(
-  connectionDetails = connectionDetails,
-  cdmDatabaseSchema = cdmDatabaseSchema,
-  cohortDatabaseSchema = cohortDatabaseSchema,
-  cohortTable = cohortTable,
-  outputFolder = outputFolder,
-  databaseId = databaseId,
-  createCohortTable = FALSE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
-  createCohorts = FALSE,
-  runCohortDiagnostics = TRUE,
-  runValidation = FALSE
-)
+# ApPhenotypeEvaluation::execute(
+#   connectionDetails = connectionDetails,
+#   cdmDatabaseSchema = cdmDatabaseSchema,
+#   cohortDatabaseSchema = cohortDatabaseSchema,
+#   added, not run yet:
+#   tempEmulationSchema = tempEmulationSchema,
+#   cohortTable = cohortTable,
+#   outputFolder = outputFolder,
+#   databaseId = databaseId,
+#   createCohortTable = FALSE, # TRUE will delete the cohort table and all existing cohorts if already built X_X
+#   createCohorts = FALSE,
+#   runCohortDiagnostics = TRUE,
+#   runValidation = FALSE
+# )
 
 ApPhenotypeEvaluation::execute(
   connectionDetails = connectionDetails,
   cdmDatabaseSchema = cdmDatabaseSchema,
+  tempEmulationSchema = tempEmulationSchema,
   cohortDatabaseSchema = cohortDatabaseSchema,
+  workDatabaseSchema = cohortDatabaseSchema,
   cohortTable = cohortTable,
   outputFolder = outputFolder,
   databaseId = databaseId,

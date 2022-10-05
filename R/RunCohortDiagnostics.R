@@ -4,6 +4,7 @@ runCohortDiagnostics <- function(connectionDetails,
                                  cohortDatabaseSchema,
                                  cohortTable,
                                  outputFolder,
+                                 tempEmulationSchema,
                                  databaseId) {
 
   exportFolder <- file.path(outputFolder, "cohortDiagnostics")

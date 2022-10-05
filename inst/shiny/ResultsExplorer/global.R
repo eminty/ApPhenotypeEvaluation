@@ -161,46 +161,46 @@ if (exists("covariateRef")) {
   prettyAnalysisIds <- c(0)
 }
 
-loadResultFiles <- function(file) {
-  result <- readr::read_rds(file)
-  return(result)
-}
-
-validationFiles <- list.files(shinyDataFolder, full.names = TRUE, pattern = "validation_results")
-validationMetrics <- lapply(validationFiles, loadResultFiles)
-validationMetrics <- dplyr::bind_rows(validationMetrics)
-validationMetrics$databaseId <- sub("cdm_", "", validationMetrics$cdm)
-validationMetrics$databaseId <- sub("_v", "", validationMetrics$databaseId)
-validationMetrics$databaseId <- gsub("[[:digit:]]+", "", validationMetrics$databaseId)
-
-validationMetrics <- validationMetrics %>%
-  dplyr::mutate(databaseId = sub("cdm_", "", cdm),
-                 databaseId = sub("_v", "", databaseId),
-                 databaseId = gsub("[[:digit:]]+", "", databaseId)) %>%
-  dplyr::select(estimatedPrevalence,
-                description,
-                databaseId,
-                cohortId,
-                truePositives,
-                trueNegatives,
-                falsePositives,
-                falseNegatives,
-                specificity,
-                sensitivity,
-                ppv,
-                npv) %>%
-  dplyr::rename(Cohort = description,
-                TP = truePositives,
-                TN = trueNegatives,
-                FP = falsePositives,
-                FN = falseNegatives,
-                Prev = estimatedPrevalence,
-                Sens = sensitivity,
-                Spec = specificity,
-                PPV = ppv,
-                NPV = npv) %>%
-  dplyr::relocate(databaseId, Cohort)
-
-diagnosticModelFiles <- list.files(shinyDataFolder, full.names = TRUE, pattern = "diagnostic_model")
-diagnosticModel <- lapply(diagnosticModelFiles, loadResultFiles)
-diagnosticModel <- dplyr::bind_rows(diagnosticModel)
+# loadResultFiles <- function(file) {
+#   result <- readr::read_rds(file)
+#   return(result)
+# }
+#
+# validationFiles <- list.files(shinyDataFolder, full.names = TRUE, pattern = "validation_results")
+# validationMetrics <- lapply(validationFiles, loadResultFiles)
+# validationMetrics <- dplyr::bind_rows(validationMetrics)
+# validationMetrics$databaseId <- sub("cdm_", "", validationMetrics$cdm)
+# validationMetrics$databaseId <- sub("_v", "", validationMetrics$databaseId)
+# validationMetrics$databaseId <- gsub("[[:digit:]]+", "", validationMetrics$databaseId)
+#
+# validationMetrics <- validationMetrics %>%
+#   dplyr::mutate(databaseId = sub("cdm_", "", cdm),
+#                  databaseId = sub("_v", "", databaseId),
+#                  databaseId = gsub("[[:digit:]]+", "", databaseId)) %>%
+#   dplyr::select(estimatedPrevalence,
+#                 description,
+#                 databaseId,
+#                 cohortId,
+#                 truePositives,
+#                 trueNegatives,
+#                 falsePositives,
+#                 falseNegatives,
+#                 specificity,
+#                 sensitivity,
+#                 ppv,
+#                 npv) %>%
+#   dplyr::rename(Cohort = description,
+#                 TP = truePositives,
+#                 TN = trueNegatives,
+#                 FP = falsePositives,
+#                 FN = falseNegatives,
+#                 Prev = estimatedPrevalence,
+#                 Sens = sensitivity,
+#                 Spec = specificity,
+#                 PPV = ppv,
+#                 NPV = npv) %>%
+#   dplyr::relocate(databaseId, Cohort)
+#
+# diagnosticModelFiles <- list.files(shinyDataFolder, full.names = TRUE, pattern = "diagnostic_model")
+# diagnosticModel <- lapply(diagnosticModelFiles, loadResultFiles)
+# diagnosticModel <- dplyr::bind_rows(diagnosticModel)
