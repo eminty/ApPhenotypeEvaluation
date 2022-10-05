@@ -1,5 +1,5 @@
 # This runs from eminty/ap_phenotype_evaluation:0.2 docker container.
-# eminty/ApPhentotypeEvaluation renv.lock is initialized in the container build. 
+# eminty/ApPhentotypeEvaluation renv.lock is initialized in the container build.
 library()
 
 # database settings ============================================================
@@ -36,18 +36,29 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms="bigquery",
                                                                 pathToDriver = bqDriverPath)
 # # Create a test connection
 # connection <- DatabaseConnector::connect(connectionDetails)
-# 
+#
 # sql <- "
 # SELECT
 #  COUNT(1) as counts
 # FROM
 #  `bigquery-public-data.cms_synthetic_patient_data_omop.care_site`
 # "
-# 
+#
 # counts <- DatabaseConnector::querySql(connection, sql)
-# 
+#
 # print(counts)
 # DatabaseConnector::disconnect(connection)
+# debugging.
+
+# uninstall current version of ApPhenotypeEvaluation
+system("sudo chmod 777 -R /usr/local/lib/R/")
+remove.packages("ApPhenotypeEvaluation")
+library()
+
+
+# open ApPhenotypeEvaluation Project
+# tempEmulationSchema argument added to RunCohortDiagnostics.R
+
 
 
 # execute study ================================================================
