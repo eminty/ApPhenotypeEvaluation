@@ -12,7 +12,7 @@ tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 
 # local settings ===============================================================
 studyFolder <- "/workdir/workdir/"
-tempFolder <- ""
+tempFolder <- "/workdir/workdir/andromedaTempFolder"
 options(andromedaTempFolder = tempFolder,
         spipen = 999)
 outputFolder <- file.path(studyFolder, databaseId)
@@ -77,6 +77,7 @@ library(magrittr)
 #   runCohortDiagnostics = FALSE,
 #   runValidation = FALSE
 # )
+
 
 #cohort diagnostics
 
