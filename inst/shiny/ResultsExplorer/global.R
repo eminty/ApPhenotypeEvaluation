@@ -204,3 +204,5 @@ if (exists("covariateRef")) {
 # diagnosticModelFiles <- list.files(shinyDataFolder, full.names = TRUE, pattern = "diagnostic_model")
 # diagnosticModel <- lapply(diagnosticModelFiles, loadResultFiles)
 # diagnosticModel <- dplyr::bind_rows(diagnosticModel)
+concept <- read.csv("/workdir/workdir/STARR/cohortDiagnostics/concept.csv")
+names(concept) <- SqlRender::snakeCaseToCamelCase(names(concept))

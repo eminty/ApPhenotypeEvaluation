@@ -9,7 +9,7 @@ cdmDatabaseSchema <- "som-rit-phi-starr-prod.starr_omop_cdm5_deid_latest"
 cohortDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 cohortTable <- "ap_phe_eval"
 tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval_temp"
-
+workDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 # local settings ===============================================================
 studyFolder <- "/workdir/workdir/"
 tempFolder <- "/workdir/workdir/andromedaTempFolder"
@@ -94,6 +94,10 @@ library(magrittr)
 #   runCohortDiagnostics = TRUE,
 #   runValidation = FALSE
 # )
+
+# NB: <stanford2> branch doesn't output concept.csv.  This was manually added
+# to workdir/workdir/STARR/cohortDiagnostics.
+
 
 ApPhenotypeEvaluation::execute(
   connectionDetails = connectionDetails,
