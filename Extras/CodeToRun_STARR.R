@@ -8,7 +8,7 @@ databaseId <- "STARR"
 cdmDatabaseSchema <- "som-rit-phi-starr-prod.starr_omop_cdm5_deid_latest"
 cohortDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 cohortTable <- "ap_phe_eval"
-tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval_temp"
+tempEmulationSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 workDatabaseSchema <- "som-nero-nigam-starr.acute_panc_phe_eval"
 # local settings ===============================================================
 studyFolder <- "/workdir/workdir/"
@@ -48,12 +48,30 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(dbms="bigquery",
 #
 # print(counts)
 # DatabaseConnector::disconnect(connection)
-# debugging.
 
-# uninstall current version of ApPhenotypeEvaluation
-# system("sudo chmod 777 -R /usr/local/lib/R/")
-# remove.packages("ApPhenotypeEvaluation")
-# library()
+
+
+##########debugging.
+#
+# # uninstall current version of ApPhenotypeEvaluation
+#  system("sudo chmod 777 -R /usr/local/lib/R/")
+#  remove.packages("ApPhenotypeEvaluation")
+#  remove.packages("PheValuator")
+#
+#  # develop branch of PheValuator
+#  devtools::install_github("https://github.com/OHDSI/PheValuator", ref = "develop", dependencies = FALSE)
+#
+#  # local branch of ApPhenotypeEvaluation via R project install.
+#
+#  library()
+#
+# # local version of ApPhenotypeEvaluation
+# # added tempEmulationSchema arg to local Phevaluator/CreatePhenoModel.R
+# #install.packages("/workdir/workdir/PheValuator",repos=NULL,type="source")
+#
+#
+# library(PheValuator)
+
 
 # open ApPhenotypeEvaluation Project
 # tempEmulationSchema argument added to RunCohortDiagnostics.R
